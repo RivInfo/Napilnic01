@@ -4,36 +4,43 @@ namespace Napilnic01
 {
     class Program
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
     }
 
     class Weapon
     {
-        public int Damage;
-        public int Bullets;
+        private int _damage;
+        private int _bullets;
 
         public void Fire(Player player)
         {
-            player.Health -= Damage;
-            Bullets -= 1;
+            player.Damadge(_damage);
+            _bullets -= 1;
         }
     }
 
     class Player
     {
-        public int Health;
+        private int _health;
+
+        public void Damadge(int damadge)
+        {
+            if (damadge <= 0)
+                throw new ArgumentOutOfRangeException();
+
+            _health -= damadge;
+
+            if (_health < 0)
+                _health = 0;
+        }
     }
 
     class Bot
     {
-        public Weapon Weapon;
+        private Weapon _weapon;
 
         public void OnSeePlayer(Player player)
         {
-            Weapon.Fire(player);
+            _weapon.Fire(player);
         }
     }
 }
